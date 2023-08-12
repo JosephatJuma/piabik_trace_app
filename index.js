@@ -1,22 +1,35 @@
+import React, { useContext, createContext, useState } from "react";
 import "react-native-gesture-handler";
 import { registerRootComponent } from "expo";
-import { PaperProvider, DefaultTheme, MD2DarkTheme } from "react-native-paper";
+import {
+  PaperProvider,
+  DefaultTheme,
+  MD2DarkTheme,
+  MD3DarkTheme,
+  MD2LightTheme,
+} from "react-native-paper";
 import App from "./App";
 
+import { StatusBar } from "expo-status-bar";
+export const ThemeContext = createContext();
+
 function Main() {
-  const customDarkTheme = {
-    ...MD2DarkTheme,
-    colors: {
-      ...MD2DarkTheme.colors,
-      // primary: "your_primary_color",
-      // accent: "your_accent_color",
-      // Customize other colors here
-    },
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
   };
   return (
-    <PaperProvider theme={DefaultTheme}>
-      <App />
-    </PaperProvider>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <PaperProvider theme={theme === "dark" ? MD3DarkTheme : DefaultTheme}>
+        <StatusBar
+          style={theme === "dark" ? "light" : "dark"}
+          backgroundColor={theme === "dark" ? "black" : "white"}
+        />
+        <App />
+      </PaperProvider>
+    </ThemeContext.Provider>
   );
 }
 

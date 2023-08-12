@@ -1,19 +1,20 @@
+import { View, Text } from "react-native";
 import React from "react";
 import { Appbar, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-function Header() {
+const Header = ({ title }) => {
   const navigation = useNavigation();
   return (
     <Appbar.Header style={{ width: "100%" }}>
       <IconButton
-        icon="menu"
+        icon="arrow-left"
         size={30}
-        onPress={() => navigation.openDrawer()}
+        onPress={() => navigation.goBack()}
       />
-      <Appbar.Content title={"Piabik"} />
+      <Appbar.Content title={title} />
       <Appbar.Action icon="dots-vertical" />
     </Appbar.Header>
   );
-}
+};
 
 export default Header;

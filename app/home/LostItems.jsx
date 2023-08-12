@@ -3,8 +3,7 @@ import { View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { FAB, Card, Text, Button, Divider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-
-const Home = () => {
+function LostItems() {
   const navigation = useNavigation();
   const lostItems = [
     { id: 1, category: "Category", uniqueId: "Unique id" },
@@ -55,6 +54,6 @@ const Home = () => {
       />
     </View>
   );
-};
+}
 
-export default Home;
+export default LostItems;

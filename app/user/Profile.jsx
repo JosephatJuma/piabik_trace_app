@@ -7,10 +7,10 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 const Profile = () => {
   const navigation = useNavigation();
   const options = [
-    { id: 1, name: "Settings", icon: "setting" },
+    { id: 1, name: "Settings", icon: "cog" },
     { id: 2, name: "Login", icon: "login" },
-    { id: 3, name: "Logout", icon: "logout" },
-    { id: 4, name: "Edit profile", icon: "user" },
+    { id: 3, name: "Logout", icon: "location-exit" },
+    { id: 4, name: "Edit profile", icon: "account" },
   ];
   return (
     <View>
