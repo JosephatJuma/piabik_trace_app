@@ -7,15 +7,12 @@ import {
   DarkTheme,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import DrawerContent from "./components/DrawerContent";
 import { ThemeContext } from ".";
 //import screens
 import Home from "./app/home/Home";
-import LostItems from "./app/home/LostItems";
-import FoundItems from "./app/home/FoundItems";
 import Profile from "./app/user/Profile";
 import Settings from "./app/user/Settings";
 import Post from "./app/post/Post";
@@ -24,30 +21,12 @@ import PostFound from "./app/post/foundItems/PostFound";
 import FollowUp from "./app/post/followup/FollowUp";
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-const TopTab = createMaterialTopTabNavigator();
-import Header from "./components/Header";
+
 export default function App() {
   const { theme } = useContext(ThemeContext);
-  const LostItemsScreen = () => {
-    return <LostItems />;
-  };
-  const FoundItemsScreen = () => {
-    return <FoundItems />;
-  };
+
   const HomeScreen = () => {
-    return (
-      <>
-        <Header />
-        <TopTab.Navigator
-          screenOptions={{
-            tabBarLabelStyle: { fontSize: 15, textTransform: "capitalize" },
-          }}
-        >
-          <TopTab.Screen name="Lost Items" component={LostItemsScreen} />
-          <TopTab.Screen name="Found Items" component={FoundItemsScreen} />
-        </TopTab.Navigator>
-      </>
-    );
+    return <Home />;
   };
   const PostScreen = () => {
     return <Post />;

@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import { FAB, Card, Text, Button, Divider } from "react-native-paper";
+import { Card, Text, Button, Divider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 const FoundItems = () => {
@@ -46,12 +46,6 @@ const FoundItems = () => {
         windowSize={5}
         removeClippedSubviews={true}
         estimatedItemSize={50}
-      />
-
-      <FAB
-        icon="plus"
-        style={{ position: "absolute", margin: 16, right: 0, bottom: 0 }}
-        onPress={() => navigation.navigate("Post")}
       />
     </View>
   );
