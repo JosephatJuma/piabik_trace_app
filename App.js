@@ -1,49 +1,60 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import { AntDesign, Ionicons } from "@expo/vector-icons";
+import DrawerContent from "./components/DrawerContent";
+//import screens
+import Home from "./app/home/Home";
+import Profile from "./app/user/Profile";
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
+
 export default function App() {
   const HomeScreen = () => {
-    return (
-      <View style={styles.container}>
-        <Text>Home Screens</Text>
-        <StatusBar style="auto" />
-      </View>
-    );
+    return <Home />;
   };
   const UserScreen = () => {
-    return (
-      <View style={styles.container}>
-        <Text>User Screens</Text>
-        <StatusBar style="auto" />
-      </View>
-    );
+    return <Profile />;
   };
   function HomeTabNavigator() {
     return (
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="User"
-          component={UserScreen}
-          options={{ headerShown: false }}
-        />
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            if (route.name === "Home") {
+              iconName = focused ? "home" : "home";
+            } else if (route.name === "User") {
+              iconName = focused ? "user" : "user";
+            } else if (route.name === "AddTask") {
+              iconName = focused ? "ios-add-circle" : "ios-add-outline";
+            }
+            return <AntDesign name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "#800080",
+          tabBarInactiveTintColor: "gray",
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="User" component={UserScreen} />
       </Tab.Navigator>
     );
   }
+
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="PiabikR=TraceIt" component={HomeTabNavigator} />
+    <NavigationContainer theme={DefaultTheme}>
+      <Drawer.Navigator
+        drawerContent={DrawerContent}
+        screenOptions={{ headerShown: false }}
+      >
+        <Drawer.Screen name="PiabikTraceIt" component={HomeTabNavigator} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
