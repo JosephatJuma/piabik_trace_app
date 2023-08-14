@@ -11,7 +11,7 @@ const Header = ({ title }) => {
         size={30}
         onPress={() => navigation.goBack()}
       />
-      <Appbar.Content title={title} />
+      <Appbar.Content title={title} titleStyle={{ fontWeight: "bold" }} />
       <Appbar.Action icon="dots-vertical" />
     </Appbar.Header>
   );

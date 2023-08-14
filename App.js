@@ -7,6 +7,7 @@ import {
   DarkTheme,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -27,7 +28,7 @@ import PostFound from "./app/post/foundItems/PostFound";
 import FollowUp from "./app/post/followup/FollowUp";
 
 const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 //context
 export const ItemsContext = createContext();

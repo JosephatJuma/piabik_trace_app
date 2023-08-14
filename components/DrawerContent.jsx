@@ -17,6 +17,7 @@ const DrawerContent = () => {
     { name: "Home", icon: "home", title: "Home" },
     { name: "User", icon: "account", title: "Profile" },
     { name: "Post", icon: "plus-box", title: "Post Item" },
+    { name: "Search", icon: "magnify", title: "Search" },
     { name: "Settings", icon: "cog", title: "Settings" },
   ];
   const navigation = useNavigation();
