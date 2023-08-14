@@ -4,7 +4,7 @@ import { FlashList } from "@shopify/flash-list";
 import { Card, Text, IconButton, Chip, Divider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { ItemsContext } from "../../App";
-const FoundItems = () => {
+const FoundItems = ({ onScroll }) => {
   const navigation = useNavigation();
   const { foundItems, refreshing, fetchItems } = useContext(ItemsContext);
 
@@ -54,6 +54,7 @@ const FoundItems = () => {
             title="Relaoding"
           />
         }
+        onScroll={onScroll}
         scrollEnabled={true}
         showsVerticalScrollIndicator={true}
         data={foundItems}
@@ -65,7 +66,7 @@ const FoundItems = () => {
         onEndReachedThreshold={5}
         windowSize={5}
         removeClippedSubviews={true}
-        estimatedItemSize={100}
+        estimatedItemSize={166}
       />
     </View>
   );

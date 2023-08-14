@@ -5,7 +5,7 @@ import { Card, Text, Chip, Divider, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { ItemsContext } from "../../App";
 
-const MatchedItems = () => {
+const MatchedItems = ({ onScroll }) => {
   const navigation = useNavigation();
   const { matchedItems, refreshing, fetchItems } = useContext(ItemsContext);
 
@@ -55,6 +55,7 @@ const MatchedItems = () => {
             title="Relaoding"
           />
         }
+        onScroll={onScroll}
         scrollEnabled={true}
         showsVerticalScrollIndicator={true}
         data={matchedItems}
@@ -66,7 +67,7 @@ const MatchedItems = () => {
         onEndReachedThreshold={5}
         windowSize={5}
         removeClippedSubviews={true}
-        estimatedItemSize={100}
+        estimatedItemSize={156}
       />
     </View>
   );

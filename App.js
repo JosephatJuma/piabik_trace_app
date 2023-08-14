@@ -1,12 +1,12 @@
 import React, { useContext, createContext } from "react";
-
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import {
   CardStyleInterpolators,
@@ -27,9 +27,11 @@ import PostLost from "./app/post/lostItems/PostLost";
 import PostFound from "./app/post/foundItems/PostFound";
 import FollowUp from "./app/post/followup/FollowUp";
 
+//navigators
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
+
 //context
 export const ItemsContext = createContext();
 export const PostsContext = createContext();
@@ -135,9 +137,7 @@ export default function App() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
-          //tabBarShowLabel: false,
-          tabBarLabelStyle: { fontSize: 15, fontWeight: "bold" },
-          tabBarStyle: { height: 60, fontSize: 30 },
+          tabBarAndroidRipple: { borderless: false },
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Home") {

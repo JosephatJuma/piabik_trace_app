@@ -1,13 +1,22 @@
 import React, { useContext, memo } from "react";
-import { View, RefreshControl } from "react-native";
+import { View, RefreshControl, FlatList } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import { Card, Text, Chip, Divider, IconButton } from "react-native-paper";
+import {
+  Card,
+  Text,
+  Chip,
+  Divider,
+  IconButton,
+  Menu,
+  Button,
+} from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { ItemsContext } from "../../App";
 
-function LostItems() {
+function LostItems({ onScroll }) {
   const navigation = useNavigation();
-  const { lostItems, refreshing, fetchItems } = useContext(ItemsContext);
+  const { lostItems, refreshing, fetchItems, showMenu, setShowMenu } =
+    useContext(ItemsContext);
 
   const renderItem = ({ item }) => {
     return (
@@ -15,14 +24,20 @@ function LostItems() {
         style={{ borderRadius: 0, paddingBottom: 5, borderWidth: 0 }}
         onPress={() =>
           navigation.navigate("Details", {
-            itemId: 86,
             item: item,
-            otherParam: "anything you want here",
           })
         }
       >
         <Card.Actions>
-          <IconButton icon={"dots-vertical"} style={{ borderWidth: 0 }} />
+          <IconButton
+            icon={"dots-vertical"}
+            style={{ borderWidth: 0 }}
+            onPress={() =>
+              navigation.navigate("Details", {
+                item: item,
+              })
+            }
+          />
         </Card.Actions>
         <Card.Content>
           <Text variant="titleMedium">{item.UniqueID}</Text>
@@ -55,6 +70,7 @@ function LostItems() {
             title="Relaoding"
           />
         }
+        onScroll={onScroll}
         scrollEnabled={true}
         showsVerticalScrollIndicator={true}
         data={lostItems}
@@ -62,11 +78,11 @@ function LostItems() {
         keyExtractor={(item) => item.UniqueID}
         numColumns={1}
         initialNumToRender={10}
-        maxToRenderPerBatch={10}
-        onEndReachedThreshold={5}
-        windowSize={5}
-        removeClippedSubviews={true}
-        estimatedItemSize={100}
+        maxToRenderPerBatch={20}
+        // onEndReachedThreshold={5}
+        // windowSize={5}
+        //removeClippedSubviews={true}
+        estimatedItemSize={160}
       />
     </View>
   );

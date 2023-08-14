@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View,Animated, } from "react-native";
 import { FAB } from "react-native-paper";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigation } from "@react-navigation/native";
@@ -10,20 +10,41 @@ import MatchedItems from "./MatchedItems";
 const TopTab = createMaterialTopTabNavigator();
 
 const Home = () => {
-  const navigation:any = useNavigation();
+  const navigation: any = useNavigation();
+   const scrollY = React.useRef(new Animated.Value(0)).current;
+
+  const onScroll = Animated.event(
+    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    { useNativeDriver: false }
+  );
+
+  // Calculate the threshold where the top bar should start scrolling up
+  const headerScrollThreshold = 10; 
  
   const LostItemsScreen = () => {
-    return <LostItems />;
+    return <LostItems onScroll={onScroll}/>;
   };
   const MatchedItemsScreen = () => {
-    return <MatchedItems/>
+    return <MatchedItems onScroll={onScroll}/>
   }
   const FoundItemsScreen = () => {
-    return <FoundItems />;
+    return <FoundItems onScroll={onScroll}/>;
   };
   return (
     <View style={{ flex: 1, width: "100%" }}>
-      <Header />
+      <Animated.View
+        style={{
+          height: scrollY.interpolate({
+            inputRange: [0, headerScrollThreshold],
+            outputRange: [100, 35],
+            extrapolate: "clamp",
+          }),
+          // Change this to your desired top bar background color
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Header />
+        </Animated.View>
       <TopTab.Navigator
         screenOptions={{
           tabBarLabelStyle: { fontSize: 15, textTransform: "capitalize", fontWeight:'bold' },
