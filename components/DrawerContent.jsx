@@ -16,6 +16,7 @@ const DrawerContent = () => {
   const screens = [
     { name: "Home", icon: "home", title: "Home" },
     { name: "User", icon: "account", title: "Profile" },
+    { name: "Post", icon: "plus-box", title: "Post Item" },
     { name: "Settings", icon: "cog", title: "Settings" },
   ];
   const navigation = useNavigation();
@@ -39,7 +40,7 @@ const DrawerContent = () => {
         <Title>Piabik Trace Document</Title>
         <Divider />
       </Card.Content>
-      <Card.Content>
+      <Card.Content style={{ width: "100%", padding: 10 }}>
         {screens.map((screen, index) => {
           return (
             <List.Item

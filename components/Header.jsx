@@ -17,7 +17,10 @@ function Header() {
         size={30}
         onPress={() => navigation.openDrawer()}
       />
-      <Appbar.Content title={"Piabik"} />
+      <Appbar.Content
+        title={"Piabik Trace"}
+        titleStyle={{ fontWeight: "bold" }}
+      />
       <Appbar.Action icon="magnify" onPress={() => {}} />
     </Appbar.Header>
   );
