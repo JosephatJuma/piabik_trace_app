@@ -49,19 +49,19 @@ export default function App() {
       await axios
         .get("https://piabik.onrender.com/v1/api/lostItems")
         .then((response) => {
-          setLostItems(response.data[0]);
+          setLostItems(response.data);
         })
         .then(async () => {
           await axios
             .get("https://piabik.onrender.com/v1/api/foundItems")
             .then((response) => {
-              setFoundItems(response.data[0]);
+              setFoundItems(response.data);
             })
             .then(async () => {
               await axios
                 .get("https://piabik.onrender.com/v1/api/matchedItems")
                 .then((response) => {
-                  setMatchedItems(response.data[0]);
+                  setMatchedItems(response.data);
                   setRefreshing(false);
                 })
                 .catch((err) => {
@@ -147,7 +147,7 @@ export default function App() {
             } else if (route.name === "Post") {
               iconName = focused ? "addfile" : "addfile";
             }
-            return <AntDesign name={iconName} size={size} color={color} />;
+            return <AntDesign name={iconName} size={25} color={color} />;
           },
           tabBarActiveTintColor: theme === "dark" ? "white" : "blue",
           tabBarInactiveTintColor: "gray",
