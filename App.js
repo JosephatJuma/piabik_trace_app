@@ -47,19 +47,19 @@ export default function App() {
     const [err, setErr] = React.useState("");
     const fetchItems = async () => {
       await axios
-        .get("http://192.168.1.8:3000/v1/api/lostItems")
+        .get("https://piabik.onrender.com/v1/api/lostItems")
         .then((response) => {
           setLostItems(response.data[0]);
         })
         .then(async () => {
           await axios
-            .get("http://192.168.1.8:3000/v1/api/foundItems")
+            .get("https://piabik.onrender.com/v1/api/foundItems")
             .then((response) => {
               setFoundItems(response.data[0]);
             })
             .then(async () => {
               await axios
-                .get("http://192.168.1.8:3000/v1/api/matchedItems")
+                .get("https://piabik.onrender.com/v1/api/matchedItems")
                 .then((response) => {
                   setMatchedItems(response.data[0]);
                   setRefreshing(false);

@@ -18,7 +18,7 @@ const FollowUp = () => {
   const [message, setMessage] = React.useState("");
   const handleSubmit = async () => {
     await axios
-      .get(`http://192.168.1.8:3000/v1/api/followUp/${code}`)
+      .get(`https://piabik.onrender.com/v1/api/followUp/${code}`)
       .then((response) => {
         if (response.data.status === false) setMessage(response.data.message);
         else setItem(response.data[0]);
