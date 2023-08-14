@@ -1,12 +1,13 @@
 import React, { useContext, memo } from "react";
 import { View, RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import { Card, Text, IconButton, Chip, Divider } from "react-native-paper";
+import { Card, Text, Chip, Divider, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { ItemsContext } from "../../App";
-const FoundItems = () => {
+
+const MatchedItems = () => {
   const navigation = useNavigation();
-  const { foundItems, refreshing, fetchItems } = useContext(ItemsContext);
+  const { matchedItems, refreshing, fetchItems } = useContext(ItemsContext);
 
   const renderItem = ({ item }) => {
     return (
@@ -56,7 +57,7 @@ const FoundItems = () => {
         }
         scrollEnabled={true}
         showsVerticalScrollIndicator={true}
-        data={foundItems}
+        data={matchedItems}
         renderItem={renderItem}
         keyExtractor={(item) => item.UniqueID}
         numColumns={1}
@@ -71,4 +72,4 @@ const FoundItems = () => {
   );
 };
 
-export default memo(FoundItems);
+export default memo(MatchedItems);

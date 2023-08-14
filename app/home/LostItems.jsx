@@ -1,53 +1,75 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useContext, memo } from "react";
+import { View, RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import { Card, Text, Button, Divider } from "react-native-paper";
+import { Card, Text, Chip, Divider, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import { ItemsContext } from "../../App";
+
 function LostItems() {
   const navigation = useNavigation();
-  const lostItems = [
-    { id: 1, category: "Category", uniqueId: "Unique id" },
-    { id: 2, category: "Category", uniqueId: "Unique id" },
-    { id: 3, category: "Category", uniqueId: "Unique id" },
-    { id: 4, category: "Category", uniqueId: "Unique id" },
-    { id: 5, category: "Category", uniqueId: "Unique id" },
-    { id: 6, category: "Category", uniqueId: "Unique id" },
-  ];
+  const { lostItems, refreshing, fetchItems } = useContext(ItemsContext);
 
   const renderItem = ({ item }) => {
     return (
-      <Card style={{ borderRadius: 0 }} elevation={1} onPress={() => {}}>
-        <Card.Content>
-          <Text variant="titleLarge">{item.uniqueId}</Text>
-          <Text variant="bodyMedium">{item.category}</Text>
-          <Text variant="bodyMedium">Date Posted</Text>
-        </Card.Content>
+      <Card
+        style={{ borderRadius: 0, paddingBottom: 5, borderWidth: 0 }}
+        onPress={() =>
+          navigation.navigate("Details", {
+            itemId: 86,
+            item: item,
+            otherParam: "anything you want here",
+          })
+        }
+      >
         <Card.Actions>
-          <Button>Cancel</Button>
-          <Button>Ok</Button>
+          <IconButton icon={"dots-vertical"} style={{ borderWidth: 0 }} />
         </Card.Actions>
-        <Divider />
+        <Card.Content>
+          <Text variant="titleMedium">{item.UniqueID}</Text>
+          <Text variant="bodyMedium">{item.Category}</Text>
+        </Card.Content>
+        <Card.Content
+          style={{ flexDirection: "row", justifyContent: "space-between" }}
+        >
+          <Text variant="bodyMedium">
+            Posted On: {new Date(item.DatePosted).toLocaleDateString()}
+          </Text>
+          <Chip icon="clock" style={{ borderRadius: 100 }}>
+            {new Date(item.DatePosted).toLocaleTimeString()}
+          </Chip>
+        </Card.Content>
       </Card>
     );
   };
+  //Refresh
+  const onRefresh = React.useCallback(() => {
+    fetchItems();
+  }, []);
   return (
     <View style={{ flex: 1, width: "100%" }}>
       <FlashList
+        refreshControl={
+          <RefreshControl
+            onRefresh={onRefresh}
+            size="default"
+            title="Relaoding"
+          />
+        }
         scrollEnabled={true}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={true}
         data={lostItems}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.UniqueID}
         numColumns={1}
-        initialNumToRender={5}
-        maxToRenderPerBatch={5}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
         onEndReachedThreshold={5}
         windowSize={5}
         removeClippedSubviews={true}
-        estimatedItemSize={50}
+        estimatedItemSize={100}
       />
     </View>
   );
 }
 
-export default LostItems;
+export default memo(LostItems);

@@ -3,6 +3,7 @@ import React from "react";
 import Header from "./components/Header";
 import { Text, Button, List } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+
 const Post = () => {
   const navigation = useNavigation();
   const options = [
@@ -28,6 +29,7 @@ const Post = () => {
   return (
     <View>
       <Header title={"Post Item"} />
+      {/* <PostsContext.Provider value={{ selectedCategory, setSelectedCategory }}> */}
       {options.map((option, index) => {
         return (
           <List.Item
@@ -40,6 +42,7 @@ const Post = () => {
           />
         );
       })}
+      {/* </PostsContext.Provider> */}
     </View>
   );
 };

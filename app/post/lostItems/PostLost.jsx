@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../components/Header";
 import SelectCatgory from "../components/SelectCatgory";
 import { View, ScrollView } from "react-native";
-import { TextInput } from "react-native-paper";
-
+import { IconButton, TextInput, Text } from "react-native-paper";
+import { PostsContext } from "../../../App";
 function PostLost() {
   // const categories = [
   //   "Student ID",
@@ -14,23 +14,68 @@ function PostLost() {
   //   "Transcript",
   //   "Library Card",
   // ];
-
+  const { showForm, setShowForm } = useContext(PostsContext);
   return (
     <View style={{ width: "100%", alignItems: "center" }}>
       <Header title={"Post Lost item"} />
-      <ScrollView
-        style={{ width: "96%", margin: 10, height: "100%", marginBottom: 200 }}
+
+      <View
+        style={{
+          width: "96%",
+          margin: 10,
+          height: "100%",
+          marginBottom: 200,
+        }}
       >
-        <SelectCatgory />
-        {/* <View>
-          <TextInput mode="outlined" label="Category" />
-          <TextInput mode="outlined" label="Category" />
-          <TextInput mode="outlined" label="Category" />
-          <TextInput mode="outlined" label="Category" />
-          <TextInput mode="outlined" label="Category" />
-          <TextInput mode="outlined" label="Category" />
-        </View> */}
-      </ScrollView>
+        {showForm === true ? (
+          <ScrollView style={{ height: 1000 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <IconButton
+                icon={"chevron-left"}
+                onPress={() => setShowForm(false)}
+              />
+              <Text>Change Category</Text>
+            </View>
+            <TextInput
+              mode="outlined"
+              label="Category"
+              style={{ marginBottom: 20 }}
+            />
+            <TextInput
+              mode="outlined"
+              label="Category"
+              style={{ marginBottom: 20 }}
+            />
+            <TextInput
+              mode="outlined"
+              label="Category"
+              style={{ marginBottom: 20 }}
+            />
+            <TextInput
+              mode="outlined"
+              label="Category"
+              style={{ marginBottom: 20 }}
+            />
+            <TextInput
+              mode="outlined"
+              label="Category"
+              style={{ marginBottom: 20 }}
+            />
+            <TextInput
+              mode="outlined"
+              label="Category"
+              style={{ marginBottom: 20 }}
+            />
+          </ScrollView>
+        ) : (
+          <SelectCatgory />
+        )}
+      </View>
     </View>
   );
 }

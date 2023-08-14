@@ -1,15 +1,11 @@
 import { View, ScrollView } from "react-native";
-import React from "react";
-import { Text, Card, Title } from "react-native-paper";
+import React, { useContext } from "react";
+import { Text, Button, Title } from "react-native-paper";
 import { RadioButton } from "react-native-paper";
+import { PostsContext } from "../../../App";
 const SelectCatgory = () => {
-  const [showSelect, setShowSelect] = React.useState(true);
-  const [checked, setChecked] = React.useState("");
-
-  const toggleShowModalle = () => {
-    setShowSelect(!showSelect);
-  };
-
+  const { selectedCategory, setSelectedCategory, setShowForm } =
+    useContext(PostsContext);
   const categories = [
     "National ID",
     "Academic Documents",
@@ -22,32 +18,39 @@ const SelectCatgory = () => {
   ];
   return (
     <View>
-      <Card>
-        <Card.Content>
-          <Title variant="bodyMedium">Select Category</Title>
-          <ScrollView>
-            {categories.map((cat, index) => {
-              return (
-                <View
-                  key={index}
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    margin: 10,
-                  }}
-                >
-                  <Text>{cat}</Text>
-                  <RadioButton
-                    value={cat}
-                    status={checked === cat ? "checked" : "unchecked"}
-                    onPress={() => setChecked(cat)}
-                  />
-                </View>
-              );
-            })}
-          </ScrollView>
-        </Card.Content>
-      </Card>
+      <ScrollView style={{ padding: 10 }}>
+        <Title variant="bodyMedium">Select Category</Title>
+        {categories.map((cat, index) => {
+          return (
+            <View
+              key={index}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                margin: 10,
+              }}
+            >
+              <Text>{cat}</Text>
+              <RadioButton
+                value={cat}
+                status={selectedCategory === cat ? "checked" : "unchecked"}
+                onPress={
+                  selectedCategory === cat
+                    ? () => setSelectedCategory("")
+                    : () => setSelectedCategory(cat)
+                }
+              />
+            </View>
+          );
+        })}
+        <Button
+          mode="contained"
+          onPress={() => setShowForm(true)}
+          disabled={selectedCategory.length > 0 ? false : true}
+        >
+          Continue
+        </Button>
+      </ScrollView>
     </View>
   );
 };

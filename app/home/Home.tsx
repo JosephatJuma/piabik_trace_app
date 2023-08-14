@@ -6,12 +6,18 @@ import { useNavigation } from "@react-navigation/native";
 import LostItems from "./LostItems";
 import FoundItems from "./FoundItems";
 import Header from "../../components/Header";
+import MatchedItems from "./MatchedItems";
 const TopTab = createMaterialTopTabNavigator();
+
 const Home = () => {
-  const navigation = useNavigation();
+  const navigation:any = useNavigation();
+ 
   const LostItemsScreen = () => {
     return <LostItems />;
   };
+  const MatchedItemsScreen = () => {
+    return <MatchedItems/>
+  }
   const FoundItemsScreen = () => {
     return <FoundItems />;
   };
@@ -20,12 +26,13 @@ const Home = () => {
       <Header />
       <TopTab.Navigator
         screenOptions={{
-          tabBarLabelStyle: { fontSize: 15, textTransform: "capitalize" },
+          tabBarLabelStyle: { fontSize: 15, textTransform: "capitalize", fontWeight:'bold' },
         }}
       >
         <TopTab.Screen name="Lost Items" component={LostItemsScreen} />
         <TopTab.Screen name="Found Items" component={FoundItemsScreen} />
-      </TopTab.Navigator>
+        <TopTab.Screen name="Matched" component={MatchedItemsScreen} />
+        </TopTab.Navigator>
       <FAB
         icon="plus"
         style={{ position: "absolute", margin: 16, right: 0, bottom: 0 }}

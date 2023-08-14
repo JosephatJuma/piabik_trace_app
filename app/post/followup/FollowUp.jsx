@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../components/Header";
 import { Text, TextInput, Button } from "react-native-paper";
 const FollowUp = () => {
+  const handleSubmit = () => {};
   return (
     <View style={{ flex: 1 }}>
       <Header title={"Follow Up"} />

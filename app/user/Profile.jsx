@@ -3,7 +3,7 @@ import React from "react";
 import { List, MD3Colors } from "react-native-paper";
 import Header from "../../components/Header";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign, Entypo } from "@expo/vector-icons";
+
 const Profile = () => {
   const navigation = useNavigation();
   const options = [
@@ -30,9 +30,7 @@ const Profile = () => {
             return (
               <List.Item
                 title={option.name}
-                left={() => (
-                  <List.Icon icon={option.icon} variant={AntDesign} />
-                )}
+                left={() => <List.Icon icon={option.icon} />}
                 right={() => <List.Icon icon="chevron-right" size={24} />}
                 key={option.id}
                 onPress={() => navigation.navigate(option.name)}

@@ -7,7 +7,7 @@ import {
   Text,
   Card,
 } from "react-native-paper";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "..";
 const DrawerContent = () => {
@@ -24,32 +24,51 @@ const DrawerContent = () => {
     navigation.navigate(screen);
   };
   return (
-    <View style={{ flex: 1, marginTop: 100 }}>
-      <Title>TraceDoc</Title>
-      <Divider />
-      {screens.map((screen, index) => {
-        return (
-          <List.Item
-            key={index}
-            title={<Title>{screen.title}</Title>}
-            active={active === screen.name}
-            onPress={() => handleNavigation(screen.name)}
-            left={() => <List.Icon icon={screen.icon} size={24} />}
-          />
-        );
-      })}
+    <ScrollView
+      style={{
+        flex: 1,
+        marginTop: 100,
+        padding: 10,
+      }}
+      contentContainerStyle={{
+        justifyContent: "space-between",
+        height: "100%",
+      }}
+    >
+      <Card.Content>
+        <Title>Piabik Trace Document</Title>
+        <Divider />
+      </Card.Content>
+      <Card.Content>
+        {screens.map((screen, index) => {
+          return (
+            <List.Item
+              key={index}
+              title={
+                <Title style={{ fontWeight: "bold" }}>{screen.title}</Title>
+              }
+              active={active === screen.name}
+              onPress={() => handleNavigation(screen.name)}
+              left={() => <List.Icon icon={screen.icon} size={24} />}
+            />
+          );
+        })}
 
-      <Divider />
+        <Divider />
+      </Card.Content>
       <IconButton
         icon="theme-light-dark"
         size={40}
-        onPress={toggleTheme}
+        onPress={() => {
+          toggleTheme();
+          () => navigation.closeDrawer();
+        }}
         style={{ margin: 16, right: 0, bottom: 0 }}
       />
       <Card.Content>
         <Text>V 1.0.0</Text>
       </Card.Content>
-    </View>
+    </ScrollView>
   );
 };
 
