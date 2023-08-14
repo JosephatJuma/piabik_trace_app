@@ -21,7 +21,10 @@ function Header() {
         title={"Piabik Trace"}
         titleStyle={{ fontWeight: "bold" }}
       />
-      <Appbar.Action icon="magnify" onPress={() => {}} />
+      <Appbar.Action
+        icon="magnify"
+        onPress={() => navigation.navigate("Search")}
+      />
     </Appbar.Header>
   );
 }

@@ -20,6 +20,7 @@ import Home from "./app/home/Home";
 import Details from "./app/home/Details";
 import Profile from "./app/user/Profile";
 import Settings from "./app/user/Settings";
+import Search from "./app/user/Search";
 import Post from "./app/post/Post";
 import PostLost from "./app/post/lostItems/PostLost";
 import PostFound from "./app/post/foundItems/PostFound";
@@ -87,6 +88,9 @@ export default function App() {
   };
   const UserScreen = () => {
     return <Profile />;
+  };
+  const SearchScreen = () => {
+    return <Search />;
   };
   const PostLostScreen = () => {
     return <PostLost />;
@@ -164,6 +168,7 @@ export default function App() {
         <Drawer.Screen name="PiabikTraceIt" component={HomeTabNavigator} />
         <Drawer.Screen name="Settings" component={SettingsScreen} />
         <Drawer.Screen name="Details" component={DetailsScreen} />
+        <Drawer.Screen name="Search" component={SearchScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

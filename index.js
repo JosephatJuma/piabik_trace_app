@@ -15,6 +15,7 @@ export const ThemeContext = createContext();
 
 function Main() {
   const [theme, setTheme] = useState("light");
+  const [user, setUser] = useState(null);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
