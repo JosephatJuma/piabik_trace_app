@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-native-gesture-handler";
 import { registerRootComponent } from "expo";
-import {
-  PaperProvider,
-  DefaultTheme,
-  MD2DarkTheme,
-  MD3DarkTheme,
-  MD2LightTheme,
-} from "react-native-paper";
-import App from "./App";
-import { ThemeContext } from "./Context/ThemeContext";
 import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { PaperProvider, DefaultTheme, MD3DarkTheme } from "react-native-paper";
+import App from "./App";
+
+//context
+import { ThemeContext } from "./Context/ThemeContext";
+import { UserContext } from "./Context/ThemeContext";
 
 function Main() {
   const [theme, setTheme] = useState("light");
@@ -22,16 +20,29 @@ function Main() {
     }
     setTheme(newTheme);
   };
+
+  const getData = async () => {
+    //await AsyncStorage.removeItem("profile");
+    await AsyncStorage.getItem("user").then((result) => {
+      const data = JSON.parse(result);
+      setUser(data);
+    });
+  }; //Fetching data
+  useEffect(() => {
+    getData();
+  }, []);
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <PaperProvider theme={theme === "dark" ? MD3DarkTheme : DefaultTheme}>
-        <StatusBar
-          style={theme === "dark" ? "light" : "dark"}
-          backgroundColor={theme === "dark" ? "black" : "white"}
-        />
-        <App />
-      </PaperProvider>
-    </ThemeContext.Provider>
+    <UserContext.Provider value={{ user, setUser }}>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <PaperProvider theme={theme === "dark" ? MD3DarkTheme : DefaultTheme}>
+          <StatusBar
+            style={theme === "dark" ? "light" : "dark"}
+            backgroundColor={theme === "dark" ? "black" : "white"}
+          />
+          <App />
+        </PaperProvider>
+      </ThemeContext.Provider>
+    </UserContext.Provider>
   );
 }
 

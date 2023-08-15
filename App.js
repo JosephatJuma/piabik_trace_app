@@ -22,7 +22,7 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { ThemeContext } from "./Context/ThemeContext";
 import { ItemsContext } from "./Context/ThemeContext";
 import { PostsContext } from "./Context/ThemeContext";
-
+import { UserContext } from "./Context/ThemeContext";
 //import screens
 import Home from "./app/home/Home";
 import Details from "./app/home/Details";
@@ -33,7 +33,7 @@ import Post from "./app/post/Post";
 import PostLost from "./app/post/lostItems/PostLost";
 import PostFound from "./app/post/foundItems/PostFound";
 import FollowUp from "./app/post/followup/FollowUp";
-
+import OnBoarding from "./app/onBoarding/OnBoarding";
 //navigators
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -41,7 +41,11 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const { theme } = useContext(ThemeContext);
+  const { user } = useContext(UserContext);
 
+  const GetStartedScreen = () => {
+    return <OnBoarding />;
+  };
   const HomeScreen = () => {
     const [lostItems, setLostItems] = React.useState([]);
     const [foundItems, setFoundItems] = React.useState([]);
@@ -156,6 +160,7 @@ export default function App() {
         screenOptions={({ route }) => ({
           headerShown: false,
           tabBarAndroidRipple: { borderless: true },
+
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Home") {
@@ -181,21 +186,27 @@ export default function App() {
   return (
     <ActionSheetProvider>
       <NavigationContainer theme={theme === "dark" ? DarkTheme : DefaultTheme}>
-        <Drawer.Navigator
-          drawerContent={DrawerContent}
-          screenOptions={{
-            headerShown: false,
-            swipeEdgeWidth: 100,
-            drawerType: "front",
-            swipeMinDistance: 100,
-            drawerStyle: { width: "85%" },
-          }}
-        >
-          <Drawer.Screen name="PiabikTraceIt" component={HomeTabNavigator} />
-          <Drawer.Screen name="Settings" component={SettingsScreen} />
-          <Drawer.Screen name="Details" component={DetailsScreen} />
-          <Drawer.Screen name="Search" component={SearchScreen} />
-        </Drawer.Navigator>
+        {user ? (
+          <Drawer.Navigator
+            drawerContent={DrawerContent}
+            screenOptions={{
+              headerShown: false,
+              swipeEdgeWidth: 100,
+              drawerType: "front",
+              swipeMinDistance: 100,
+              drawerStyle: { width: "85%" },
+            }}
+          >
+            <Drawer.Screen name="PiabikTraceIt" component={HomeTabNavigator} />
+            <Drawer.Screen name="Settings" component={SettingsScreen} />
+            <Drawer.Screen name="Details" component={DetailsScreen} />
+            <Drawer.Screen name="Search" component={SearchScreen} />
+          </Drawer.Navigator>
+        ) : (
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="getStarted" component={GetStartedScreen} />
+          </Stack.Navigator>
+        )}
       </NavigationContainer>
     </ActionSheetProvider>
   );
