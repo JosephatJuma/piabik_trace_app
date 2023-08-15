@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import {
   Divider,
-  List,
+  Avatar,
   IconButton,
   Title,
   Text,
   Card,
+  Drawer,
 } from "react-native-paper";
-import { View, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../Context/ThemeContext";
 const DrawerContent = () => {
@@ -42,21 +43,24 @@ const DrawerContent = () => {
       }}
     >
       <Card.Content>
-        <Title style={{ fontWeight: "bold" }}>Piabik Trace Document</Title>
+        <Avatar.Icon size={80} icon="account" />
+        <Title style={{ fontWeight: "bold", margin: 5 }}>
+          Piabik Trace Document
+        </Title>
         <Divider />
       </Card.Content>
       <Card.Content style={{ width: "100%" }}>
         {screens.map((screen, index) => {
           return (
-            <List.Item
+            <Drawer.Item
               key={index}
-              title={
+              label={
                 <Title style={{ fontWeight: "bold" }}>{screen.title}</Title>
               }
               active={active === screen.name}
               onPress={() => handleNavigation(screen.name)}
-              left={() => <List.Icon icon={screen.icon} size={24} />}
-              style={{ padding: 10, width: "100%" }}
+              icon={screen.icon}
+              style={{ padding: 10, width: "100%", margin: 10 }}
             />
           );
         })}

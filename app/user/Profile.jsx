@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { List, MD3Colors } from "react-native-paper";
+import { List, Surface, Divider } from "react-native-paper";
 import Header from "../../components/Header";
 import { useNavigation } from "@react-navigation/native";
 
@@ -18,7 +18,7 @@ const Profile = () => {
       <View
         style={{ width: "100%", alignContent: "center", alignItems: "center" }}
       >
-        <List.Section
+        <Surface
           style={{
             width: "98%",
             margin: "auto",
@@ -28,17 +28,19 @@ const Profile = () => {
           {/* <List.Subheader>Some title</List.Subheader> */}
           {options.map((option) => {
             return (
-              <List.Item
-                title={option.name}
-                left={() => <List.Icon icon={option.icon} />}
-                right={() => <List.Icon icon="chevron-right" size={24} />}
-                key={option.id}
-                onPress={() => navigation.navigate(option.name)}
-                style={{ alignSelf: "center" }}
-              />
+              <React.Fragment key={option.id}>
+                <List.Item
+                  title={option.name}
+                  left={() => <List.Icon icon={option.icon} />}
+                  right={() => <List.Icon icon="chevron-right" size={24} />}
+                  onPress={() => navigation.navigate(option.name)}
+                  style={{ alignSelf: "center" }}
+                />
+                <Divider />
+              </React.Fragment>
             );
           })}
-        </List.Section>
+        </Surface>
       </View>
     </View>
   );

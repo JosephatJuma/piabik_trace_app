@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from "react";
+import React, { useContext } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
   NavigationContainer,
@@ -173,46 +173,6 @@ export default function App() {
         <Tab.Screen name="Post" component={PostStackNavigator} />
         <Tab.Screen name="User" component={UserScreen} />
       </Tab.Navigator>
-      // <Tab.Navigator
-      //   shifting={true}
-      //   //barStyle={{ backgroundColor: "#FFFFFF" }}
-      //   tabBar={({ state, descriptors, navigation }) => (
-      //     <CustomTabBarButton
-      //       onPress={() => navigation.navigate(state.routeNames[state.index])}
-      //     >
-      //       {state.routes.map((route, index) => {
-      //         const { options } = descriptors[route.key];
-      //         const iconSize = 25;
-      //         let iconName;
-
-      //         if (route.name === "Home") {
-      //           iconName = state.index === index ? "home" : "home";
-      //         } else if (route.name === "User") {
-      //           iconName = state.index === index ? "user" : "user";
-      //         } else if (route.name === "Post") {
-      //           iconName = state.index === index ? "addfile" : "addfile";
-      //         }
-
-      //         return (
-      //           <View key={route.key}>
-      //             <AntDesign
-      //               name={iconName}
-      //               size={iconSize}
-      //               color={options.tabBarActiveTintColor}
-      //             />
-      //             <Text style={{ color: options.tabBarActiveTintColor }}>
-      //               {route.name}
-      //             </Text>
-      //           </View>
-      //         );
-      //       })}
-      //     </CustomTabBarButton>
-      //   )}
-      // >
-      //   <Tab.Screen name="Home" component={HomeScreen} />
-      //   <Tab.Screen name="Post" component={PostStackNavigator} />
-      //   <Tab.Screen name="User" component={UserScreen} />
-      // </Tab.Navigator>
     );
   }
 
@@ -221,7 +181,13 @@ export default function App() {
       <NavigationContainer theme={theme === "dark" ? DarkTheme : DefaultTheme}>
         <Drawer.Navigator
           drawerContent={DrawerContent}
-          screenOptions={{ headerShown: false }}
+          screenOptions={{
+            headerShown: false,
+            swipeEdgeWidth: 100,
+            drawerType: "front",
+            swipeMinDistance: 100,
+            drawerStyle: { width: "85%" },
+          }}
         >
           <Drawer.Screen name="PiabikTraceIt" component={HomeTabNavigator} />
           <Drawer.Screen name="Settings" component={SettingsScreen} />

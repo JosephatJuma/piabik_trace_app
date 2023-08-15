@@ -25,7 +25,7 @@ const Settings = () => {
       <Surface elevation={1} style={styles.surface}>
         {themes.map((t) => {
           return (
-            <>
+            <React.Fragment key={t}>
               <Card.Content style={styles.card}>
                 <Card.Content style={styles.cardContenet}>
                   <IconButton
@@ -46,7 +46,7 @@ const Settings = () => {
                 />
               </Card.Content>
               <Divider />
-            </>
+            </React.Fragment>
           );
         })}
       </Surface>
