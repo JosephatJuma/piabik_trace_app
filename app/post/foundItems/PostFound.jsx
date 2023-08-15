@@ -1,7 +1,7 @@
 import { View, ScrollView, StyleSheet } from "react-native";
 import React, { useContext } from "react";
 import Header from "../components/Header";
-import { Text, TextInput, IconButton } from "react-native-paper";
+import { Text, TextInput, IconButton, Button } from "react-native-paper";
 import SelectCatgory from "../components/SelectCatgory";
 import { PostsContext } from "../../../Context/ThemeContext";
 const PostFound = () => {
@@ -118,46 +118,44 @@ const PostFound = () => {
     <View>
       <Header title={"Post Found Item"} />
 
-      <ScrollView
-        style={{
-          width: "96%",
-          margin: 10,
-          height: "100%",
-          marginBottom: 200,
-        }}
-      >
-        {showForm === true ? (
-          <View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <IconButton
-                icon={"chevron-left"}
-                onPress={() => setShowForm(false)}
-              />
-              <Text>Change Category</Text>
-            </View>
+      {showForm === true ? (
+        <ScrollView>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
             <IconButton
-              icon={"camera"}
-              size={80}
-              style={{ alignSelf: "center" }}
-              onPress={() => {}}
+              icon={"chevron-left"}
+              onPress={() => setShowForm(false)}
             />
-            {renderInputBasedOnCategory()}
-            <TextInput mode="outlined" label="Category" style={styles.input} />
-            <TextInput mode="outlined" label="Category" style={styles.input} />
+            <Text>Change Category</Text>
           </View>
-        ) : (
-          <SelectCatgory />
-        )}
-      </ScrollView>
+          <IconButton
+            icon={"camera"}
+            size={80}
+            style={{ alignSelf: "center" }}
+            onPress={() => {}}
+          />
+          {renderInputBasedOnCategory()}
+          {/* <TextInput mode="outlined" label="Category" style={styles.input} />
+          <TextInput mode="outlined" label="Category" style={styles.input} /> */}
+          <Button
+            mode="contained"
+            onPress={() => {}}
+            style={{ width: "90%", alignSelf: "center" }}
+          >
+            Submit
+          </Button>
+        </ScrollView>
+      ) : (
+        <SelectCatgory />
+      )}
     </View>
   );
 };
 const styles = StyleSheet.create({
-  input: { marginBottom: 20 },
+  input: { marginBottom: 20, width: "96%", alignSelf: "center" },
 });
 export default PostFound;

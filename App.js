@@ -22,6 +22,7 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { ThemeContext } from "./Context/ThemeContext";
 import { ItemsContext } from "./Context/ThemeContext";
 import { PostsContext } from "./Context/ThemeContext";
+
 //import screens
 import Home from "./app/home/Home";
 import Details from "./app/home/Details";
@@ -45,9 +46,12 @@ export default function App() {
     const [lostItems, setLostItems] = React.useState([]);
     const [foundItems, setFoundItems] = React.useState([]);
     const [matchedItems, setMatchedItems] = React.useState([]);
-    const [refreshing, setRefreshing] = React.useState(true);
+    const [refreshing, setRefreshing] = React.useState(false);
     const [err, setErr] = React.useState("");
+
     const fetchItems = async () => {
+      setRefreshing(true);
+      setErr("");
       await axios
         .get("https://piabik.onrender.com/v1/api/lostItems")
         .then((response) => {
@@ -64,18 +68,19 @@ export default function App() {
                 .get("https://piabik.onrender.com/v1/api/matchedItems")
                 .then((response) => {
                   setMatchedItems(response.data);
-                  setRefreshing(false);
                 })
                 .catch((err) => {
-                  setErr("Unexpected Error occured");
-                  setRefreshing(false);
+                  setErr("Unexpected error occured");
                 });
             })
             .catch((err) => {
-              setErr("Un Expected Error occured");
-              setRefreshing(false);
+              setErr("Unexpected error occured");
             });
+        })
+        .catch((err) => {
+          setErr("Unexpected error occured");
         });
+      setRefreshing(false);
     };
 
     React.useEffect(() => {
@@ -90,6 +95,7 @@ export default function App() {
           fetchItems,
           refreshing,
           err,
+          setErr,
         }}
       >
         <Home />
@@ -131,7 +137,7 @@ export default function App() {
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
           }}
         >
           <Stack.Screen name="Posts" component={PostScreen} />
