@@ -11,8 +11,10 @@ import {
   Button,
 } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { ItemsContext } from "../../App";
 import ActionSheet from "../post/components/ActionSheet";
+//context
+import { ItemsContext } from "../../Context/ThemeContext";
+
 function LostItems({ onScroll }) {
   const navigation = useNavigation();
   const { lostItems, refreshing, fetchItems, showMenu, setShowMenu } =

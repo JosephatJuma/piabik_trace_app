@@ -3,7 +3,9 @@ import { View, RefreshControl } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { Card, Text, IconButton, Chip, Divider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { ItemsContext } from "../../App";
+
+//context
+import { ItemsContext } from "../../Context/ThemeContext";
 const FoundItems = ({ onScroll }) => {
   const navigation = useNavigation();
   const { foundItems, refreshing, fetchItems } = useContext(ItemsContext);

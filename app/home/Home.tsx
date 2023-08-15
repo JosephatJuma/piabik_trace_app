@@ -8,7 +8,8 @@ import FoundItems from "./FoundItems";
 import Header from "../../components/Header";
 import MatchedItems from "./MatchedItems";
 //context
-import { ItemsContext } from "../../App";
+import { ItemsContext } from "../../Context/ThemeContext";
+
 const TopTab = createMaterialTopTabNavigator();
 
 
