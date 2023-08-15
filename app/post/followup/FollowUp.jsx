@@ -8,15 +8,22 @@ import {
   Card,
   DataTable,
   IconButton,
+  Snackbar,
+  ProgressBar,
+  Banner,
 } from "react-native-paper";
 import axios from "axios";
-import ActionSheet from "../components/ActionSheet";
+
 const FollowUp = () => {
   const [code, setCode] = React.useState("");
   const [item, setItem] = React.useState(null);
   const [showResults, setShowResults] = React.useState(false);
   const [message, setMessage] = React.useState("");
+  const [err, setErr] = React.useState("");
+  const [followingUp, setFoll] = React.useState(false);
   const handleSubmit = async () => {
+    setFoll(true);
+    setErr();
     await axios
       .get(`https://piabik.onrender.com/v1/api/followUp/${code}`)
       .then((response) => {
@@ -25,8 +32,9 @@ const FollowUp = () => {
         setShowResults(true);
       })
       .catch((err) => {
-        console.log(err.message);
+        setErr(err.message);
       });
+    setFoll(false);
   };
 
   return (
@@ -73,14 +81,18 @@ const FollowUp = () => {
                 </DataTable>
               </Card>
             ) : (
-              <Card.Content
+              <Banner
+                visible={true}
+                actions={[
+                  { label: "Try Again", onPress: () => setShowResults(false) },
+                  // { label: "Okay", onPress: () => setErr("") },
+                ]}
+                icon={"information-outline"}
                 style={{
-                  alignItems: "center",
-                  // alignContent: "center",
-                  justifyContent: "center",
+                  alignSelf: "center",
+                  width: "96%",
                 }}
               >
-                <IconButton icon={"information"} size={100} />
                 <Text
                   style={{
                     fontSize: 25,
@@ -90,7 +102,7 @@ const FollowUp = () => {
                 >
                   {message}
                 </Text>
-              </Card.Content>
+              </Banner>
             )}
           </>
         ) : (
@@ -121,15 +133,18 @@ const FollowUp = () => {
           </View>
         )}
       </View>
-      <ActionSheet
-        component={<Button>Opne It</Button>}
-        options={["Delete", "Cancel", "More", "Figure out"]}
-        cancelButtonIndex={1}
-        autoFocus={true}
-        bg={""}
-        indexOnePressed={() => console.log("yes")}
-        indexZeroPressed={() => console.log("yes")}
-      />
+      <Snackbar
+        visible={err}
+        onDismiss={() => setErr("")}
+        action={{
+          label: "Again!",
+          onPress: handleSubmit,
+        }}
+        duration={10000}
+      >
+        {err}
+      </Snackbar>
+      {followingUp && <ProgressBar indeterminate={true} />}
     </>
   );
 };
