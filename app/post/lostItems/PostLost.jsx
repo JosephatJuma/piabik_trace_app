@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import SelectCatgory from "../components/SelectCatgory";
 import { View, ScrollView } from "react-native";
 import { IconButton, TextInput, Text } from "react-native-paper";
-import { PostsContext } from "../../../App";
+import { PostsContext } from "../../../Context/ThemeContext";
 function PostLost() {
   // const categories = [
   //   "Student ID",

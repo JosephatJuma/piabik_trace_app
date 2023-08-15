@@ -9,7 +9,7 @@ import {
 } from "react-native-paper";
 import { View, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { ThemeContext } from "..";
+import { ThemeContext } from "../Context/ThemeContext";
 const DrawerContent = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [active, setActive] = React.useState("Home");
@@ -24,6 +24,10 @@ const DrawerContent = () => {
   const handleNavigation = (screen) => {
     setActive(screen);
     navigation.navigate(screen);
+  };
+  const handleToggleTheme = () => {
+    theme === "light" ? toggleTheme("dark") : toggleTheme("light");
+    navigation.goBack();
   };
   return (
     <ScrollView
@@ -62,10 +66,7 @@ const DrawerContent = () => {
       <IconButton
         icon="theme-light-dark"
         size={40}
-        onPress={() => {
-          toggleTheme();
-          () => navigation.closeDrawer();
-        }}
+        onPress={handleToggleTheme}
         style={{ margin: 16, right: 0, bottom: 0 }}
       />
       <Card.Content>

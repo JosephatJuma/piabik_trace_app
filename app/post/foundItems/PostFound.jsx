@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import Header from "../components/Header";
 import { Text, TextInput, IconButton } from "react-native-paper";
 import SelectCatgory from "../components/SelectCatgory";
-import { PostsContext } from "../../../App";
+import { PostsContext } from "../../../Context/ThemeContext";
 const PostFound = () => {
   const { showForm, setShowForm, selectedCategory } = useContext(PostsContext);
 

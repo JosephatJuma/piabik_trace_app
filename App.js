@@ -17,7 +17,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import DrawerContent from "./components/DrawerContent";
 import axios from "axios";
 //context
-import { ThemeContext } from ".";
+import { ThemeContext } from "./Context/ThemeContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 //import screens
 import Home from "./app/home/Home";
@@ -29,7 +29,7 @@ import Post from "./app/post/Post";
 import PostLost from "./app/post/lostItems/PostLost";
 import PostFound from "./app/post/foundItems/PostFound";
 import FollowUp from "./app/post/followup/FollowUp";
-
+import { PostsContext } from "./Context/ThemeContext";
 //navigators
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -37,7 +37,7 @@ const Stack = createStackNavigator();
 
 //context
 export const ItemsContext = createContext();
-export const PostsContext = createContext();
+//export const PostsContext = createContext();
 
 export default function App() {
   const { theme } = useContext(ThemeContext);

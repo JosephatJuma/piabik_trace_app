@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Appbar, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { ThemeContext } from "..";
+import { ThemeContext } from "../Context/ThemeContext";
 function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const navigation = useNavigation();

@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useState } from "react";
+import React, { useState } from "react";
 import "react-native-gesture-handler";
 import { registerRootComponent } from "expo";
 import {
@@ -9,16 +9,17 @@ import {
   MD2LightTheme,
 } from "react-native-paper";
 import App from "./App";
-
+import { ThemeContext } from "./Context/ThemeContext";
 import { StatusBar } from "expo-status-bar";
-export const ThemeContext = createContext();
 
 function Main() {
   const [theme, setTheme] = useState("light");
   const [user, setUser] = useState(null);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
+  const toggleTheme = (newTheme) => {
+    if (newTheme === theme) {
+      return;
+    }
     setTheme(newTheme);
   };
   return (

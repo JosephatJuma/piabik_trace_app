@@ -2,7 +2,7 @@ import { View, ScrollView } from "react-native";
 import React, { useContext } from "react";
 import { Text, Button, Title } from "react-native-paper";
 import { RadioButton } from "react-native-paper";
-import { PostsContext } from "../../../App";
+import { PostsContext } from "../../../Context/ThemeContext";
 const SelectCatgory = () => {
   const { selectedCategory, setSelectedCategory, setShowForm } =
     useContext(PostsContext);
