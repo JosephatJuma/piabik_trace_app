@@ -10,7 +10,7 @@ import {
   IconButton,
 } from "react-native-paper";
 import axios from "axios";
-
+import ActionSheet from "../components/ActionSheet";
 const FollowUp = () => {
   const [code, setCode] = React.useState("");
   const [item, setItem] = React.useState(null);
@@ -28,6 +28,7 @@ const FollowUp = () => {
         console.log(err.message);
       });
   };
+
   return (
     <>
       <Header title={"Follow Up"} />
@@ -120,6 +121,15 @@ const FollowUp = () => {
           </View>
         )}
       </View>
+      <ActionSheet
+        component={<Button>Opne It</Button>}
+        options={["Delete", "Cancel", "More", "Figure out"]}
+        cancelButtonIndex={1}
+        autoFocus={true}
+        bg={""}
+        indexOnePressed={() => console.log("yes")}
+        indexZeroPressed={() => console.log("yes")}
+      />
     </>
   );
 };

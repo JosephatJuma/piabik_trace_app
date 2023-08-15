@@ -30,18 +30,18 @@ const DrawerContent = () => {
       style={{
         flex: 1,
         marginTop: 100,
-        padding: 10,
       }}
       contentContainerStyle={{
         justifyContent: "space-between",
         height: "100%",
+        width: "100%",
       }}
     >
       <Card.Content>
-        <Title>Piabik Trace Document</Title>
+        <Title style={{ fontWeight: "bold" }}>Piabik Trace Document</Title>
         <Divider />
       </Card.Content>
-      <Card.Content style={{ width: "100%", padding: 10 }}>
+      <Card.Content style={{ width: "100%" }}>
         {screens.map((screen, index) => {
           return (
             <List.Item
@@ -52,6 +52,7 @@ const DrawerContent = () => {
               active={active === screen.name}
               onPress={() => handleNavigation(screen.name)}
               left={() => <List.Icon icon={screen.icon} size={24} />}
+              style={{ padding: 10, width: "100%" }}
             />
           );
         })}

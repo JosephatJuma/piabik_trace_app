@@ -12,7 +12,7 @@ import {
 } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { ItemsContext } from "../../App";
-
+import ActionSheet from "../post/components/ActionSheet";
 function LostItems({ onScroll }) {
   const navigation = useNavigation();
   const { lostItems, refreshing, fetchItems, showMenu, setShowMenu } =
@@ -29,14 +29,17 @@ function LostItems({ onScroll }) {
         }
       >
         <Card.Actions>
-          <IconButton
-            icon={"dots-vertical"}
-            style={{ borderWidth: 0 }}
-            onPress={() =>
-              navigation.navigate("Details", {
-                item: item,
-              })
+          <ActionSheet
+            component={
+              <IconButton icon={"dots-vertical"} style={{ borderWidth: 0 }} />
             }
+            title={item.UniqueID}
+            options={["Delete", "Cancel", "More", "Figure out"]}
+            cancelButtonIndex={1}
+            autoFocus={true}
+            bg={""}
+            indexOnePressed={() => console.log("yes")}
+            indexZeroPressed={() => console.log("yes")}
           />
         </Card.Actions>
         <Card.Content>

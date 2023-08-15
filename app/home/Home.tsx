@@ -1,18 +1,21 @@
-import React from "react";
+import React,{useContext} from "react";
 import { View,Animated, } from "react-native";
-import { FAB } from "react-native-paper";
+import { FAB,ProgressBar,Text } from "react-native-paper";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigation } from "@react-navigation/native";
 import LostItems from "./LostItems";
 import FoundItems from "./FoundItems";
 import Header from "../../components/Header";
 import MatchedItems from "./MatchedItems";
+//context
+import { ItemsContext } from "../../App";
 const TopTab = createMaterialTopTabNavigator();
+
 
 const Home = () => {
   const navigation: any = useNavigation();
    const scrollY = React.useRef(new Animated.Value(0)).current;
-
+const {refreshing,err}=useContext(ItemsContext);
   const onScroll = Animated.event(
     [{ nativeEvent: { contentOffset: { y: scrollY } } }],
     { useNativeDriver: false }
@@ -45,15 +48,22 @@ const Home = () => {
         }}>
         <Header />
         </Animated.View>
+      {refreshing &&
+        <ProgressBar indeterminate={true} />}
+      
       <TopTab.Navigator
-        screenOptions={{
+          screenOptions={{
           tabBarLabelStyle: { fontSize: 15, textTransform: "capitalize", fontWeight:'bold' },
-        }}
+          }}
+          
       >
         <TopTab.Screen name="Lost Items" component={LostItemsScreen} />
         <TopTab.Screen name="Found Items" component={FoundItemsScreen} />
         <TopTab.Screen name="Matched" component={MatchedItemsScreen} />
         </TopTab.Navigator>
+     
+        {err && <Text>{err}</Text>}
+      
       <FAB
         icon="plus"
         style={{ position: "absolute", margin: 16, right: 0, bottom: 0 }}
