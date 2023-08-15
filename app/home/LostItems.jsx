@@ -9,6 +9,7 @@ import {
   IconButton,
   Menu,
   Button,
+  List,
 } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import ActionSheet from "../post/components/ActionSheet";
@@ -23,12 +24,13 @@ function LostItems({ onScroll }) {
   const renderItem = ({ item }) => {
     return (
       <Card
-        style={{ borderRadius: 0, paddingBottom: 5, borderWidth: 0 }}
+        style={{ borderRadius: 0, borderWidth: 0 }}
         onPress={() =>
           navigation.navigate("Details", {
             item: item,
           })
         }
+        accessible={true}
       >
         <Card.Actions>
           <ActionSheet
@@ -58,6 +60,7 @@ function LostItems({ onScroll }) {
             {new Date(item.DatePosted).toLocaleTimeString()}
           </Chip>
         </Card.Content>
+        <Divider style={{ marginTop: 2 }} />
       </Card>
     );
   };

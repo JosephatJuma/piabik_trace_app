@@ -16,9 +16,7 @@ const OnBoarding = () => {
   const updateLauchResults = async () => {
     try {
       await AsyncStorage.setItem("user", JSON.stringify({ lauched: true }));
-    } catch (error) {
-      console.log("error occured");
-    }
+    } catch (error) {}
     setUser({ lauched: true });
   };
 

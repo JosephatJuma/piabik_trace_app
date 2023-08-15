@@ -14,7 +14,7 @@ const MatchedItems = ({ onScroll }) => {
   const renderItem = ({ item }) => {
     return (
       <Card
-        style={{ borderRadius: 0, paddingBottom: 5, borderWidth: 0 }}
+        style={{ borderRadius: 0, borderWidth: 0 }}
         onPress={() =>
           navigation.navigate("Details", {
             itemId: 86,
@@ -40,6 +40,7 @@ const MatchedItems = ({ onScroll }) => {
             {new Date(item.DatePosted).toLocaleTimeString()}
           </Chip>
         </Card.Content>
+        <Divider style={{ marginTop: 2 }} />
       </Card>
     );
   };
