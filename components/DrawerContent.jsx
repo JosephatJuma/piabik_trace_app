@@ -11,6 +11,7 @@ import {
 import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../Context/ThemeContext";
+
 const DrawerContent = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [active, setActive] = React.useState("Home");
@@ -28,7 +29,6 @@ const DrawerContent = () => {
   };
   const handleToggleTheme = () => {
     theme === "light" ? toggleTheme("dark") : toggleTheme("light");
-    navigation.goBack();
   };
   return (
     <ScrollView
