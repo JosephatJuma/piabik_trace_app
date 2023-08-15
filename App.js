@@ -151,9 +151,11 @@ export default function App() {
   function HomeTabNavigator() {
     return (
       <Tab.Navigator
+        inactiveColor="gray"
+        shifting={true}
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarAndroidRipple: { borderless: false },
+          tabBarAndroidRipple: { borderless: true },
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Home") {

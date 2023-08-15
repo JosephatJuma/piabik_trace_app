@@ -42,13 +42,13 @@ const DrawerContent = () => {
         width: "100%",
       }}
     >
-      <Card.Content>
+      <Card.Content style={{ alignContent: "center", alignItems: "center" }}>
         <Avatar.Icon size={80} icon="account" />
         <Title style={{ fontWeight: "bold", margin: 5 }}>
           Piabik Trace Document
         </Title>
-        <Divider />
       </Card.Content>
+      <Divider />
       <Card.Content style={{ width: "100%" }}>
         {screens.map((screen, index) => {
           return (

@@ -20,7 +20,7 @@ const Profile = () => {
       >
         <Surface
           style={{
-            width: "98%",
+            width: "100%",
             margin: "auto",
             alignSelf: "center",
           }}
@@ -34,7 +34,7 @@ const Profile = () => {
                   left={() => <List.Icon icon={option.icon} />}
                   right={() => <List.Icon icon="chevron-right" size={24} />}
                   onPress={() => navigation.navigate(option.name)}
-                  style={{ alignSelf: "center" }}
+                  style={{ alignSelf: "center", padding: 10 }}
                 />
                 <Divider />
               </React.Fragment>
