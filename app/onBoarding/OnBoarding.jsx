@@ -9,9 +9,19 @@ import {
   Button,
   Card,
 } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserContext } from "../../Context/ThemeContext";
 const OnBoarding = () => {
   const { setUser } = useContext(UserContext);
+  const updateLauchResults = async () => {
+    try {
+      await AsyncStorage.setItem("user", JSON.stringify({ lauched: true }));
+    } catch (error) {
+      console.log("error occured");
+    }
+    setUser({ lauched: true });
+  };
+
   return (
     <ImageBackground
       source={require("../assets/image.jpg")}
@@ -48,7 +58,7 @@ const OnBoarding = () => {
             borderColor: "#fff",
             borderWidth: 5,
           }}
-          onPress={() => setUser({ lauched: true })}
+          onPress={updateLauchResults}
         >
           Get Started
         </Button>

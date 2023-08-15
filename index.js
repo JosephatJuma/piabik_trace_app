@@ -21,15 +21,14 @@ function Main() {
     setTheme(newTheme);
   };
 
-  const getData = async () => {
-    //await AsyncStorage.removeItem("profile");
+  const getUser = async () => {
     await AsyncStorage.getItem("user").then((result) => {
       const data = JSON.parse(result);
       setUser(data);
     });
   }; //Fetching data
   useEffect(() => {
-    getData();
+    getUser();
   }, []);
   return (
     <UserContext.Provider value={{ user, setUser }}>
