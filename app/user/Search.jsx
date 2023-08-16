@@ -2,6 +2,7 @@ import { View, ScrollView } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Text, Appbar, Searchbar, Banner, List } from "react-native-paper";
+import { Divider, Surface } from "react-native-paper";
 import axios from "axios";
 
 const Search = () => {
@@ -49,16 +50,18 @@ const Search = () => {
           {results.length > 0 &&
             results.map((result, index) => {
               return (
-                <List.Item
-                  key={index}
-                  title={result.UniqueID}
-                  description={result.Category}
-                  right={() => <Text>{result.Type}</Text>}
-                  left={() => <List.Icon icon="tag" />}
-                  onPress={() =>
-                    navigation.navigate("Details", { item: result })
-                  }
-                />
+                <Surface key={index} elevation={1}>
+                  <List.Item
+                    title={result.UniqueID}
+                    description={result.Category}
+                    right={() => <Text>{result.Type}</Text>}
+                    left={() => <List.Icon icon="gamepad-circle" />}
+                    onPress={() =>
+                      navigation.navigate("Details", { item: result })
+                    }
+                  />
+                  <Divider />
+                </Surface>
               );
             })}
         </ScrollView>
@@ -66,7 +69,7 @@ const Search = () => {
         <Banner
           visible={true}
           actions={[{ label: "Okay", onPress: () => setErr("") }]}
-          icon={"information-outline"}
+          icon={"alert"}
           style={{ alignSelf: "center", width: "98%", margin: "auto" }}
         >
           <Text
