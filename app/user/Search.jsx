@@ -34,7 +34,6 @@ const Search = () => {
     <View>
       <Appbar.Header style={{ padding: 10 }}>
         <Searchbar
-          //value={search}
           mode="bar"
           icon={"arrow-left"}
           onIconPress={() => navigation.goBack()}
@@ -54,8 +53,8 @@ const Search = () => {
                   key={index}
                   title={result.UniqueID}
                   description={result.Category}
-                  right={(props) => <Text>{result.Type}</Text>}
-                  left={(props) => <List.Icon {...props} icon="tag" />}
+                  right={() => <Text>{result.Type}</Text>}
+                  left={() => <List.Icon icon="tag" />}
                   onPress={() =>
                     navigation.navigate("Details", { item: result })
                   }
