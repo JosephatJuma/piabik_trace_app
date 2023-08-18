@@ -42,7 +42,7 @@ const Stack = createStackNavigator();
 export default function App() {
   const { theme } = useContext(ThemeContext);
   const { user } = useContext(UserContext);
-
+  const userType = user !== null ? "user" : "guest";
   const GetStartedScreen = () => {
     return <OnBoarding />;
   };
@@ -182,31 +182,34 @@ export default function App() {
       </Tab.Navigator>
     );
   }
-
+  const currentView = {
+    user: (
+      <Drawer.Navigator
+        drawerContent={DrawerContent}
+        screenOptions={{
+          headerShown: false,
+          swipeEdgeWidth: 100,
+          drawerType: "front",
+          swipeMinDistance: 100,
+          drawerStyle: { width: "85%" },
+        }}
+      >
+        <Drawer.Screen name="PiabikTraceIt" component={HomeTabNavigator} />
+        <Drawer.Screen name="Settings" component={SettingsScreen} />
+        <Drawer.Screen name="Details" component={DetailsScreen} />
+        <Drawer.Screen name="Search" component={SearchScreen} />
+      </Drawer.Navigator>
+    ),
+    guest: (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="getStarted" component={GetStartedScreen} />
+      </Stack.Navigator>
+    ),
+  }[userType];
   return (
     <ActionSheetProvider>
       <NavigationContainer theme={theme === "dark" ? DarkTheme : DefaultTheme}>
-        {user ? (
-          <Drawer.Navigator
-            drawerContent={DrawerContent}
-            screenOptions={{
-              headerShown: false,
-              swipeEdgeWidth: 100,
-              drawerType: "front",
-              swipeMinDistance: 100,
-              drawerStyle: { width: "85%" },
-            }}
-          >
-            <Drawer.Screen name="PiabikTraceIt" component={HomeTabNavigator} />
-            <Drawer.Screen name="Settings" component={SettingsScreen} />
-            <Drawer.Screen name="Details" component={DetailsScreen} />
-            <Drawer.Screen name="Search" component={SearchScreen} />
-          </Drawer.Navigator>
-        ) : (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="getStarted" component={GetStartedScreen} />
-          </Stack.Navigator>
-        )}
+        {currentView}
       </NavigationContainer>
     </ActionSheetProvider>
   );
